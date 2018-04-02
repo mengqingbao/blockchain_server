@@ -1,0 +1,3 @@
+Manifest-Version: 1.0  
+Main-Class: bc.blockchain.server.Bootstrap  
+Class-Path: lib/blockchanin_server-0.1.jar

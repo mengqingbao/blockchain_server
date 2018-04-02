@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:mq="http://www.youfangbao.com/schema/bao/bao.xsd"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.youfangbao.com/schema/bao
+        http://www.youfangbao.com/schema/bao/bao.xsd">
+
+   <mq:consumer id="consumer" channel="queue2" port="12349"></mq:consumer>
+   <mq:provider id="provider" hosts="dddd,cccc,eee" ports="11111,22222,3333"></mq:provider>
+</beans>
