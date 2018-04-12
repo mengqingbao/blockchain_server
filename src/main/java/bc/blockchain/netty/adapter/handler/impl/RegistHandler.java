@@ -4,25 +4,24 @@ import io.netty.channel.Channel;
 
 import java.net.InetSocketAddress;
 
-import bc.blockchain.message.Message;
+import bc.blockchain.common.request.Request;
+import bc.blockchain.common.request.RequestType;
+import bc.blockchain.common.response.Response;
 import bc.blockchain.netty.adapter.handler.AbstractHandler;
 import bc.blockchain.server.BlockChainContext;
 
 public class RegistHandler extends AbstractHandler {
 	
-	public RegistHandler(BlockChainContext blockChainContext) {
-		this.blockChainContext=blockChainContext;
-	}
 
 	@Override
-	public void process(Channel channel, Message messsageInfos) {
-		InetSocketAddress socket=(InetSocketAddress) channel;
-		String ip = socket.getAddress().getHostAddress();
-		Integer port=socket.getPort();
-		System.out.print("ip:"+ip +"  port:"+port);
-		channel.write("success");
-		channel.close();
-	
+	public void doProcess(Request request, Response response) {
+		if(request.getrequestType()!=RequestType.REG){
+			return;
+		}
+		response.setCode("200");
+		response.setContent(callBack.getPeer().toString());
+		response.putHeader(request.getrequestType());
+		callBack.execute();
 	}
 
 }

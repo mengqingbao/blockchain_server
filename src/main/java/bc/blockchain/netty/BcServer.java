@@ -14,11 +14,11 @@ import io.netty.handler.timeout.IdleStateHandler;
 
 import java.util.concurrent.TimeUnit;
 
+import bc.blockchain.callback.CallBack;
 import bc.blockchain.netty.adapter.NettyServerAdapter;
+import bc.blockchain.netty.decoder.NettyDecoder;
+import bc.blockchain.netty.decoder.NettyEncoder;
 import bc.blockchain.server.BlockChainContext;
-import cn.bofowo.openmessaging.netty.NettyServerContext;
-import cn.bofowo.openmessaging.netty.decoder.NettyDecoder;
-import cn.bofowo.openmessaging.netty.decoder.NettyEncoder;
 
 public class BcServer {
 
@@ -37,7 +37,7 @@ public class BcServer {
 	protected final int BIZTHREADSIZE = 4;
 	
 	private Integer port=12188;
-	private String ip="0.0.0.0";
+	private String ip="localhost";
 
 	/**
 	 * NioEventLoopGroup实际上就是个线程池,
@@ -48,9 +48,11 @@ public class BcServer {
 	private final EventLoopGroup bossGroup = new NioEventLoopGroup(BIZGROUPSIZE);
 	private final EventLoopGroup workerGroup = new NioEventLoopGroup(BIZTHREADSIZE);
 
-	public BcServer() {
+	public BcServer(BlockChainContext blockChainContext) {
+		this.blockChainContext=blockChainContext;
 		nettyServerAdapter = new NettyServerAdapter(blockChainContext);
 	}
+
 
 	public void run() throws Exception {
 
@@ -78,10 +80,6 @@ public class BcServer {
 	protected void shutdown() {
 		workerGroup.shutdownGracefully();
 		bossGroup.shutdownGracefully();
-	}
-
-	public static void main(String[] args) throws Exception {
-		new BcServer().run();
 	}
 
 	

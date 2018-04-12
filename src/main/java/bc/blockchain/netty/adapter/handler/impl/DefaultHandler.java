@@ -1,20 +1,18 @@
 package bc.blockchain.netty.adapter.handler.impl;
 
 import io.netty.channel.Channel;
-import bc.blockchain.message.Message;
+import bc.blockchain.common.request.Request;
+import bc.blockchain.common.response.Response;
 import bc.blockchain.netty.adapter.handler.AbstractHandler;
+import bc.blockchain.netty.adapter.handler.chain.HandlerChain;
 import bc.blockchain.server.BlockChainContext;
 
 public class DefaultHandler extends AbstractHandler {
-	public DefaultHandler(BlockChainContext blockChainContext) {
-		this.blockChainContext=blockChainContext;
-	}
 
 	@Override
-	public void process(Channel channel, Message messsageInfo) {
+	public void doProcess(Request request, Response response) {
 		
-		channel.write("error code.");
-		channel.close();
+		
 	}
 
 }

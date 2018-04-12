@@ -1,34 +1,19 @@
 package bc.blockchain.netty.adapter.handler;
 
 import io.netty.channel.Channel;
-import io.netty.channel.ChannelHandlerContext;
-
-import java.util.Map;
-
-import bc.blockchain.message.Message;
-import bc.blockchain.server.BlockChainContext;
+import bc.blockchain.callback.CallBack;
+import bc.blockchain.common.request.Request;
+import bc.blockchain.common.response.Response;
+import bc.blockchain.netty.adapter.handler.chain.HandlerChain;
 
 public interface Handler {
 	
 	/**
 	 * 处理逻辑
 	 */
-	public void process(Channel channel, Message messsageInfo);
+	public void process(Request request, Response response,HandlerChain chain);
 	
-	/**
-	 * 构架handler链表
-	 * @param handler
-	 */
-	public void setHandler(Handler handler);
+	public void setCallBack(CallBack callBack);
 	
-	
-	public Handler nextHandler();
-	
-	
-	public void setChannel(Channel channel);
-	
-	public void setMessage(Message message);
-	
-	public void setBlockChainContext(BlockChainContext context);
 
 }

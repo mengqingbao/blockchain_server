@@ -77,7 +77,7 @@ then
   REPO="$BASEDIR"/lib
 fi
 
-CLASSPATH=$CLASSPATH_PREFIX:"$BASEDIR"/conf:"$REPO"/junit-4.12.jar:"$REPO"/hamcrest-core-1.3.jar:"$REPO"/log4j-1.2.14.jar:"$REPO"/slf4j-api-1.7.7.jar:"$REPO"/slf4j-log4j12-1.7.7.jar:"$REPO"/spring-context-4.3.9.RELEASE.jar:"$REPO"/spring-aop-4.3.9.RELEASE.jar:"$REPO"/spring-beans-4.3.9.RELEASE.jar:"$REPO"/spring-core-4.3.9.RELEASE.jar:"$REPO"/commons-logging-1.2.jar:"$REPO"/spring-expression-4.3.9.RELEASE.jar:"$REPO"/netty-all-4.1.9.Final.jar:"$REPO"/blockchanin_server-0.1.jar
+CLASSPATH=$CLASSPATH_PREFIX:"$BASEDIR"/conf:"$REPO"/junit-4.12.jar:"$REPO"/hamcrest-core-1.3.jar:"$REPO"/log4j-1.2.14.jar:"$REPO"/slf4j-api-1.7.7.jar:"$REPO"/slf4j-log4j12-1.7.7.jar:"$REPO"/netty-all-4.1.9.Final.jar:"$REPO"/fastjson-1.2.9.jar:"$REPO"/commons-cli-1.4.jar:"$REPO"/blockchanin_server-0.1.jar
 EXTRA_JVM_ARGUMENTS="-Xms128m"
 
 # For Cygwin, switch paths to Windows format before running java

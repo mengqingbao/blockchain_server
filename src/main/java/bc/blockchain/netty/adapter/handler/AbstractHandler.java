@@ -1,36 +1,29 @@
 package bc.blockchain.netty.adapter.handler;
 
 import io.netty.channel.Channel;
-import io.netty.channel.ChannelHandlerContext;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import cn.bofowo.openmessaging.netty.NettyServerContext;
-import bc.blockchain.message.Message;
-import bc.blockchain.server.BlockChainContext;
+import bc.blockchain.callback.CallBack;
+import bc.blockchain.common.request.Request;
+import bc.blockchain.common.response.Response;
+import bc.blockchain.netty.adapter.handler.chain.HandlerChain;
 
 public abstract class AbstractHandler implements Handler {
 
-	private Handler handler;
 	private Map<String, Object> dataMap = new HashMap<String, Object>();
 
-	protected BlockChainContext blockChainContext;
+	protected CallBack callBack;
 	protected Channel channel;
-	protected Message message;
 
 	@Override
-	public abstract void process(Channel channel, Message messsageInfo);
+	public void process(Request request, Response response,HandlerChain chain){
+		doProcess(request,response);
+		chain.doHandle(request, response, chain);
+	};
 
-	@Override
-	public void setHandler(Handler handler) {
-		this.handler = handler;
-	}
-
-	@Override
-	public Handler nextHandler() {
-		return handler;
-	}
+	public abstract void doProcess(Request request, Response response);
 
 	public Object getObject(String key) {
 		if (dataMap != null) {
@@ -51,18 +44,15 @@ public abstract class AbstractHandler implements Handler {
 		this.dataMap = dataMap;
 	}
 
-	@Override
-	public void setBlockChainContext(BlockChainContext context) {
-		this.blockChainContext = context;
-
-	}
 
 	public void setChannel(Channel channel) {
 		this.channel = channel;
 	}
 
-	public void setMessage(Message message) {
-		this.message = message;
+	@Override
+	public void setCallBack(CallBack callBack) {
+		this.callBack=callBack;
 	}
+
 
 }

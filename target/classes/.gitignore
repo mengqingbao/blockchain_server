@@ -1,4 +1,7 @@
+/META-INF/
+/bc/
 /bin/
 /cn/
-/bc/
-/META-INF/
+/package.xml
+/test/
+/log4j.properties

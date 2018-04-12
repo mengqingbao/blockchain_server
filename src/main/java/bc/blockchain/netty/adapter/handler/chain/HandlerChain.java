@@ -1,21 +1,27 @@
 package bc.blockchain.netty.adapter.handler.chain;
 
-import io.netty.channel.Channel;
-
 import java.util.LinkedList;
 
-import bc.blockchain.message.Message;
+import bc.blockchain.common.request.Request;
+import bc.blockchain.common.response.Response;
 import bc.blockchain.netty.adapter.handler.Handler;
 
 public class HandlerChain {
 	private LinkedList<Handler> link=new LinkedList();
-	
-	public void doHandle(Channel channel, Message messsageInfo){
-		for(Handler handler:link){
-			handler.process(channel, messsageInfo);
+	private Integer point=0;
+	public void doHandle(Request request, Response response,HandlerChain chain) {
+		if(point<chain.size()){
+			Handler handler = link.get(point);
+			point++;
+			handler.process(request,response,chain);
 		}
+		
 	}
 	public void addHandler(Handler handler){
 		link.add(handler);
+	}
+	
+	public Integer size(){
+		return link.size();
 	}
 }

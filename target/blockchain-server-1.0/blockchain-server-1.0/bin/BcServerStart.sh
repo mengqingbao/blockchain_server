@@ -24,8 +24,9 @@ BASEDIR=`(cd "$BASEDIR"; pwd)`
 
 
 # OS specific support.  $var _must_ be set to either true or false.
-declare JAVA_HOME_1=`echo $JAVA_HOME`
-echo $JAVA_HOME_1
+echo "$JAVA_HOME"
+JAVA_HOME=`echo "$JAVA_HOME"`
+echo $JAVA_HOME
 echo "----------"
 cygwin=false;
 darwin=false;
@@ -39,7 +40,7 @@ case "`uname`" in
            fi
            
            if [ -z `$JAVA_HOME` ] ; then
-              JAVA_HOME=$JAVA_HOME_1
+              JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_25.jdk/Contents/Home
            	  echo $JAVA_HOME
            fi
            ;;
@@ -97,7 +98,7 @@ fi
 exec "$JAVACMD" $JAVA_OPTS \
   $EXTRA_JVM_ARGUMENTS \
   -classpath "$CLASSPATH" \
-  -Dapp.name="BcServerStart" \
+  -Dapp.name="BcServer" \
   -Dapp.pid="$$" \
   -Dapp.repo="$REPO" \
   -Dbasedir="$BASEDIR" \
