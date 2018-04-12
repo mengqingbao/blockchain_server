@@ -1417,3 +1417,10 @@ com.alibaba.fastjson.JSONException: syntax error, position at 0, name ip
 2018-04-12 17:13:51 404-->[pool-1-thread-1]--[INFO ]--[Bootstrap]--{"address":"127.0.0.1","ip":"127.0.0.1","liveTime":1523524430847,"port":54414}
 2018-04-12 17:13:56 401-->[pool-1-thread-1]--[INFO ]--[Bootstrap]--Peer端数量&列表：1
 2018-04-12 17:13:56 401-->[pool-1-thread-1]--[INFO ]--[Bootstrap]--{"address":"127.0.0.1","ip":"127.0.0.1","liveTime":1523524430847,"port":54414}
+2018-04-12 17:14:01 402-->[pool-1-thread-1]--[INFO ]--[Bootstrap]--Peer端数量&列表：1
+2018-04-12 17:14:01 402-->[pool-1-thread-1]--[INFO ]--[Bootstrap]--{"address":"127.0.0.1","ip":"127.0.0.1","liveTime":1523524430847,"port":54414}
+2018-04-12 17:14:05 846-->[nioEventLoopGroup-3-3]--[INFO ]--[Bootstrap]--更新服务器内容
+2018-04-12 17:14:06 402-->[pool-1-thread-1]--[INFO ]--[Bootstrap]--Peer端数量&列表：1
+2018-04-12 17:14:06 402-->[pool-1-thread-1]--[INFO ]--[Bootstrap]--{"address":"127.0.0.1","ip":"127.0.0.1","liveTime":1523524445846,"port":54414}
+2018-04-12 17:14:11 404-->[pool-1-thread-1]--[INFO ]--[Bootstrap]--Peer端数量&列表：1
+2018-04-12 17:14:11 404-->[pool-1-thread-1]--[INFO ]--[Bootstrap]--{"address":"127.0.0.1","ip":"127.0.0.1","liveTime":1523524445846,"port":54414}
