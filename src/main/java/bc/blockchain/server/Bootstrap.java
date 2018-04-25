@@ -1,5 +1,7 @@
 package bc.blockchain.server;
 
+import io.netty.util.internal.StringUtil;
+
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.HelpFormatter;
@@ -8,8 +10,14 @@ import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 import org.apache.commons.cli.PosixParser;
 
+import bc.blockchain.util.PcWifiMac;
+
 public class Bootstrap extends BlockChainContext{
 	
+	public Bootstrap(String localMac) {
+		this.setLocalMac(localMac);
+	}
+
 	public static void main(String[] args){
 		
 		Options options = new Options();
@@ -44,12 +52,16 @@ public class Bootstrap extends BlockChainContext{
             }
         }
         catch (ParseException e) {
-            hf.printHelp("testApp", options, true);
+            hf.printHelp("block chain server", options, true);
         }
 		
-        
-        
-		Bootstrap bs=new Bootstrap();
+        PcWifiMac mac=new PcWifiMac();
+        String localmac=mac.getLocalMac();
+        if(StringUtil.isNullOrEmpty(localmac)){
+        	System.out.println("mac is null.");
+        	return;
+        }
+		Bootstrap bs=new Bootstrap(localmac);
 		bs.start();
 		System.out.println("The server startup successful.");
 	}

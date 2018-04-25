@@ -37,7 +37,7 @@ public class BcServer {
 	protected final int BIZTHREADSIZE = 4;
 	
 	private Integer port=12188;
-	private String ip="localhost";
+	private String ip="0.0.0.0";
 
 	/**
 	 * NioEventLoopGroup实际上就是个线程池,

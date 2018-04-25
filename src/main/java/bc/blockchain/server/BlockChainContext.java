@@ -1,5 +1,7 @@
 package bc.blockchain.server;
 
+import io.netty.channel.Channel;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Hashtable;
@@ -11,6 +13,7 @@ import java.util.concurrent.TimeUnit;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import bc.blockchain.common.request.Request;
 import bc.blockchain.netty.BcServer;
 import bc.blockchain.peer.Peer;
 import bc.blockchain.util.DateUtil;
@@ -21,7 +24,11 @@ public class BlockChainContext {
 	private ScheduledExecutorService scheduledThreadPool = Executors
 			.newScheduledThreadPool(1);
 	private BcServer server;
-
+	
+	private String localMac;
+	
+	private ThreadLocal<Boolean> cometStatus=new ThreadLocal();
+	
 	public void initServer() {
 		if (server == null) {
 			server = new BcServer(this);
@@ -68,7 +75,7 @@ public class BlockChainContext {
 				List<Peer> waitingDelPeerList = new ArrayList();
 				for (String key : peerTable.keySet()) {
 					Peer peer = peerTable.get(key);
-					logger.info(peer.toString());
+					logger.info(peer.toString()+"//"+key);
 					if (peer.getLiveTime().before(
 							DateUtil.addSecond(new Date(), -30))) {
 						waitingDelPeerList.add(peer);
@@ -94,17 +101,52 @@ public class BlockChainContext {
 
 	}
 
+	//注册客户端
 	public void regClient(Peer peer) {
-		peerTable.put(peer.genId(), peer);
+		peerTable.put(peer.getClientId(),peer);
+		cometStatus.set(true);
+	}
+	
+	//export 客户端信息
+	public List<String> export() {
+		List<String> ids=new ArrayList();
+		int i=0;
+		for(String key : peerTable.keySet()){
+			Peer pee=peerTable.get(key);
+			if(i>20){
+				break;
+			}
+			ids.add(pee.getDomain());
+		}
+		
+		
+		return ids;
+	}
+	
+	//交换数据
+	public void exchange(Request request){
+		Channel channel = peerTable.get(request.getTargetId()).getChannel();
+		channel.write(request.toString());
+	}
+	
+	public void removeClient(String domain){
+		peerTable.remove(domain);
 	}
 
-	public void freshClient(Peer peer) {
-		Peer peer2 = peerTable.get(peer.genId());
+	public void freshClient(String key) {
+		if(!cometStatus.get()){
+			return;
+		}
+		Peer peer2 = peerTable.get(key);
 		if (peer2 != null) {
 			peer2.setLiveTime(new Date());
-			peerTable.put(peer2.genId(), peer2);
-			logger.info("更新服务器内容");
+			peerTable.put(key, peer2);
+			logger.info(key+"刷新服务器状态"+peer2.toString());
 		}
+	}
+
+	public void setLocalMac(String localMac) {
+		this.localMac = localMac;
 	}
 
 }

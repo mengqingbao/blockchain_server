@@ -13,6 +13,7 @@ import java.util.Date;
 
 import bc.blockchain.callback.impl.SimpleCallBack;
 import bc.blockchain.common.request.Request;
+import bc.blockchain.common.request.RequestType;
 import bc.blockchain.common.response.Response;
 import bc.blockchain.peer.Peer;
 import bc.blockchain.server.BlockChainContext;
@@ -36,17 +37,15 @@ public class NettyServerAdapter extends ChannelInboundHandlerAdapter {
 		Peer peer = createPeer(isd.getHostString(), isd.getPort());
 		SimpleCallBack callback=new SimpleCallBack(blockChainContext,req.getrequestType());
 		callback.setPeer(peer);;
+		callback.setRequest(req);
 		Response response= new DispatherUtil(callback).doService(req);
-		write(response,ctx);
+		Channel channel=ctx.channel();
+		channel.writeAndFlush(response.toString());
+		if(req.getrequestType()==RequestType.BYE){
+			channel.close();
+		}
 	}
 
-	private void write(Response response,ChannelHandlerContext ctx) {
-		
-		Channel channel=ctx.channel();
-		
-		channel.writeAndFlush(response.toString());
-		channel.close();
-	}
 
 	@Override
 	public void userEventTriggered(ChannelHandlerContext ctx, Object evt)

@@ -69,7 +69,7 @@ if "%JAVACMD%"=="" set JAVACMD=java
 
 if "%REPO%"=="" set REPO=%BASEDIR%\lib
 
-set CLASSPATH="%BASEDIR%"\conf;"%REPO%"\junit-4.12.jar;"%REPO%"\hamcrest-core-1.3.jar;"%REPO%"\log4j-1.2.14.jar;"%REPO%"\slf4j-api-1.7.7.jar;"%REPO%"\slf4j-log4j12-1.7.7.jar;"%REPO%"\netty-all-4.1.9.Final.jar;"%REPO%"\fastjson-1.2.9.jar;"%REPO%"\commons-cli-1.4.jar;"%REPO%"\blockchanin_server-0.1.jar
+set CLASSPATH="%BASEDIR%"\conf;"%REPO%"\junit-4.12.jar;"%REPO%"\hamcrest-core-1.3.jar;"%REPO%"\log4j-1.2.14.jar;"%REPO%"\slf4j-api-1.7.7.jar;"%REPO%"\slf4j-log4j12-1.7.7.jar;"%REPO%"\netty-all-4.1.9.Final.jar;"%REPO%"\fastjson-1.2.9.jar;"%REPO%"\commons-cli-1.4.jar;"%REPO%"\blockchanin_common-1.0.jar;"%REPO%"\blockchanin_server-0.1.jar
 set EXTRA_JVM_ARGUMENTS=-Xms128m
 goto endInit
 

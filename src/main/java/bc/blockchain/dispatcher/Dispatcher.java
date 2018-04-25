@@ -1,10 +1,10 @@
 package bc.blockchain.dispatcher;
 
+import bc.blockchain.adapter.handler.chain.HandlerChain;
+import bc.blockchain.adapter.handler.factory.HandlerFactory;
 import bc.blockchain.callback.CallBack;
 import bc.blockchain.common.request.Request;
 import bc.blockchain.common.response.Response;
-import bc.blockchain.netty.adapter.handler.chain.HandlerChain;
-import bc.blockchain.netty.adapter.handler.factory.HandlerFactory;
 import bc.blockchain.server.BlockChainContext;
 
 public class Dispatcher {
