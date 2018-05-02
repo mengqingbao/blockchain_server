@@ -3,6 +3,7 @@ package bc.blockchain.callback.impl;
 import java.util.List;
 
 import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 
 import bc.blockchain.callback.CallBack;
 import bc.blockchain.common.request.Request;
@@ -35,6 +36,9 @@ public class SimpleCallBack implements CallBack {
 			break;
 		case REFRESHCLIENT:
 			context.freshClient(request.getClientId());
+			response.setCode("200");
+			response.putHeader(request.getrequestType());
+			response.setContent(JSONObject.toJSONString(context.export()));
 			break;
 
 		case COMMON:

@@ -116,7 +116,7 @@ public class BlockChainContext {
 			if(i>20){
 				break;
 			}
-			ids.add(pee.getDomain());
+			ids.add(pee.getClientId());
 		}
 		
 		
